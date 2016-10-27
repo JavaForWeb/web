@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VizixChain - Secret Party</title>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href="css/bootstrap.min.css" rel='stylesheet' type='text/css'>
+    <link href="css/app.css" rel='stylesheet' type='text/css'>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <span class="navbar-brand"><img src="logo.png" style="height:28px"></span>
+      <a class="navbar-brand" href="#"  style='font-size:19pt'>JavaForWeb</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#tab_home" data-toggle="tab">Home</a></li>
+        <li><a href="#tab_viewcontract" data-toggle="tab">My Account</a></li>
+        <li><a href="#tab_newcontract" data-toggle="tab">Contracts</a></li>
+        <li><a href="#tab_accounts" data-toggle="tab">Vendors</a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">login <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Admin</a></li>
+          </ul>
+        </li>
+      </ul>
+
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container" role="main">
+  <div class="tab-content">
+
+    <!--home !-->
+    <div class="tab-pane fade active in" id="tab_home">
+      <div class="jumbotron">
+        <h1>JavaForWeb</h1>
+        <p>Sample Web Application</p>
+      </div>
+    </div>
+
+    <!-- accounts -->
+    <div class="tab-pane fade" id="tab_accounts">
+      <div class="row tab-header">
+        <div class="col-sm-8">
+          <h2>Accounts</h2>
+        </div>
+        <div class="col-sm-4 tab-header-column">
+          <button type="button" class="btn btn-default tab-header-button" onclick="postToServlet()">add account</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8">
+          <table id="table-accounts" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Account address</th>
+                <th>balance</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- contracts -->
+    <div class="tab-pane fade" id="tab_contracts">
+      <div class="row tab-header">
+        <div class="col-sm-6">
+          <h2>Contracts</h2>
+        </div>
+        <div class="col-sm-6 tab-header-column">
+          <!--<button type="button" class="btn btn-default tab-header-button" onclick="postToServlet()">add contract</button> -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7">
+          <table id="table-contracts" class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>account</th>
+                <th>contract</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-4">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h2 class="panel-title">contractsByAddress</h2>
+            </div>
+
+            <div class="panel-body">
+              <p><b>Address:</b></p>
+              <p><span id="contractsByAddressText"></span></p>
+
+              <p><b>ABI:</b></p>
+                <textarea id="contractsByAddressABI" rows=16 cols=43 ></textarea>
+              </p>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- newcontract -->
+    <div class="tab-pane fade" id="tab_newcontract">
+
+      <div class="row">
+        <div class="col-sm-8">
+
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h2 class="panel-title">New Smart Contract</h2>
+            </div>
+
+            <div class="panel-body">
+
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="type">Contract type:</label>
+                  <div class="col-sm-10">
+                    <label  class="form-control" id="type">Packing List</label>
+                  </div>
+                </div>
+
+                <div class="form-group" style='position:absolute; visibility:hidden'>
+                  <label class="control-label col-sm-2" for="serial">Smart Contract Serial:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="serial" value="" placeholder="Enter Serial">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="Consignee">Retailer:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="Consignee" value="" placeholder="Enter Retailer">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="ConsigneeBank">Carrier:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="ConsigneeBank" value="" placeholder="Enter Consignee Bank">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="PackageTag">Package Tag:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="PackageTag" value="" placeholder="Enter Package Tag">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="Shipper">Supplier:</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="Shipper" value="" placeholder="Enter Supplier">
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+
+          <div class="panel panel-success">
+
+            <div class="panel-body">
+                <div class="form-group">
+                  <button type="button" onclick="postToServlet()" class="btn ">Random Data</button>
+                </div>
+
+                <div class="form-group" style="display:none;">
+                  <select id="thingsId" onclick="postToServlet()">
+                  </select>
+
+                  <button type="button" onclick="postToServlet()" class="btn ">Get from Vizix</button>
+                </div>
+                <div class="form-group">
+                  <button type="button" onclick="postToServlet()" class="btn btn-info">Create Contract</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm-2">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- viewcontract -->
+    <!-- login -->
+    <div class="tab-pane fade" id="tab_viewcontract">
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">Select Smart Contract</h3>
+            </div>
+
+            <div class="panel-body">
+              <div class="form-group">
+                <label class="control-label col-sm-4" for="serial">Smart Contract Serial:</label>
+                <select id="contractsId" onclick="postToServlet()" class="col-sm-6">
+                </select>
+                <span style='visibility:hidden'>----</span>
+                <button style='margin-left:5px' type="button" class="btn btn-sm btn-warning col-sm-1" onclick="postToServlet()">Select</button>
+              </div>
+
+
+
+              <table class="table table-bordered table-stripped">
+              <tr class='hiddenfornow'><td class='col-sm-4'>serial: </td><td><span id="serialView"></span></td></tr>
+              <tr><td class='col-sm-4'><b>Contract Type:</b> </td><td><span>Packing List</span></td></tr>
+              <tr><td class='col-sm-4'><b>Retailer:</b> </td><td><span id="ConsigneeView"></span></td></tr>
+              <tr><td><b>Carrier:</b> </td><td><span id="ConsigneeBankView"></span></td></tr>
+              <tr><td><b>PackageTag:</b> </td><td><span id="PackageTagView"></span></td></tr>
+              <tr><td><b>Supplier:</b> </td><td><span id="ShipperView"></span></td></tr>
+              <tr><td><b>Status:</b> </td><td><span id="contractStatus"></span></td></tr>
+              </table>
+
+
+            </div>
+
+            <div class="alert">
+              <span id="status" class="alert "></span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-sm-3 hiddenfornow">
+          <div class="panel panel-warning " id="ShipperPanel">
+            <div class="panel-heading">
+              <h3 class="panel-title">1. Supplier</h3>
+            </div>
+
+            <div class="panel-body">
+              <button type="button" class="btn btn-sm btn-info" onclick="postToServlet()">eSign Approval</button>
+            </div>
+          </div>
+
+          <div class="panel panel-warning " id="TransportPanel">
+            <div class="panel-heading">
+              <h3 class="panel-title">2. Carrier</h3>
+            </div>
+
+            <div class="panel-body">
+              <input type="text" class="form-control" id="PackageTag2" value="" placeholder="Enter Package Tag">
+              <button type="button" class="btn btn-sm btn-info" onclick="postToServlet()">eSign Approval</button>
+            </div>
+          </div>
+
+          <div class="panel panel-warning " id="PortPanel">
+            <div class="panel-heading">
+              <h3 class="panel-title">3. Port Authority</h3>
+            </div>
+
+            <div class="panel-body">
+              <button type="button" class="btn btn-sm btn-info" onclick="postToServlet()">eSign Approval</button>
+            </div>
+          </div>
+
+          <div class="panel panel-warning" id="CustomsPanel">
+            <div class="panel-heading">
+              <h3 class="panel-title">4. Customs Authority</h3>
+            </div>
+
+            <div class="panel-body">
+              <button type="button" class="btn btn-sm btn-info" onclick="postToServlet()">eSign Approval</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-sm-2">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- events -->
+    <div class="tab-pane fade" id="tab_events">
+
+      <div class="row tab-header">
+        <div class="col-sm-8">
+          <h2>Events</h2>
+        </div>
+        <div class="col-sm-4 tab-header-column">
+          <button type="button" class="btn btn-default tab-header-button" onclick="postToServlet()">ClearEvents</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-10">
+          <table id="table-events" class="table table-striped table-bordered">
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- examples !-->
+    <div class="tab-pane fade" id="tab_b">
+
+      <div class="page-header">
+        <h1>Progress bars</h1>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"><span class="sr-only">40% Complete (success)</span></div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%"><span class="sr-only">20% Complete</span></div>
+      </div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%"><span class="sr-only">60% Complete</span></div>
+      </div>
+
+    </div>
+  </div><!-- tab content -->
+
+  </div>
+
+
+
+  <footer class="footer navbar-fixed-bottom">
+      <div id="statusbar" class="alert "></div>
+  </footer>
+
+
+
+</body>
+</html>
