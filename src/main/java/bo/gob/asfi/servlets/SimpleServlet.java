@@ -1,4 +1,6 @@
-package bo.asfi.gob.servlets;
+package bo.gob.asfi.servlets;
+
+import org.apache.log4j.Logger;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +20,11 @@ import java.io.PrintWriter;
 )
 public class SimpleServlet extends HttpServlet
 {
+	static Logger log = Logger.getLogger(SimpleServlet.class.getName());
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
+		log.info("doGet ");
 
 		PrintWriter writer = response.getWriter();
 		writer.println("<html>Hello, I am a simple Java servlet!</html>");
@@ -36,6 +41,8 @@ public class SimpleServlet extends HttpServlet
 		int height = Integer.parseInt(paramHeight);
 
 		long area = width * height;
+
+		log.info("doPost " + width + " x " + height);
 
 		PrintWriter writer = response.getWriter();
 		writer.println("Area of the rectangle is: " + area + "");
