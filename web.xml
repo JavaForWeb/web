@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="web" default="all">
+  
+  
+  <property file="web.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.bundle/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/.tox/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/RCS/**"/>
+    <exclude name="**/SCCS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/rcs/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.ear"/>
+    <include name="*.apk"/>
+    <include name="*.zip"/>
+    <include name="*.swc"/>
+    <include name="*.ane"/>
+    <include name="*.egg"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="lib/ant-javafx.jar"/>
+      <include name="lib/dt.jar"/>
+      <include name="lib/javafx-mx.jar"/>
+      <include name="lib/jconsole.jar"/>
+      <include name="lib/sa-jdi.jar"/>
+      <include name="lib/tools.jar"/>
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.gradle:_antlr:antlr:2.7.7.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/antlr/antlr/2.7.7/83cd2cd674a217ade95a4bb83a8a14f351f48bd0/antlr-2.7.7.jar"/>
+  </path>
+  
+  <path id="library.gradle:_com.fasterxml:classmate:1.3.0.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml/classmate/1.3.0/183407ff982e9375f1a1c4a51ed0a9307c598fc7/classmate-1.3.0.jar"/>
+  </path>
+  
+  <path id="library.gradle:_dom4j:dom4j:1.6.1.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/dom4j/dom4j/1.6.1/5d3ccc056b6f056dbf0dddfdf43894b9065a8f94/dom4j-1.6.1.jar"/>
+  </path>
+  
+  <path id="library.gradle:_javax.servlet:javax.servlet-api:3.0.1.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.0.1/6bf0ebb7efd993e222fc1112377b5e92a13b38dd/javax.servlet-api-3.0.1.jar"/>
+  </path>
+  
+  <path id="library.gradle:_log4j:log4j:1.2.17.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/5af35056b4d257e4b64b9e8069c0746e8b08629f/log4j-1.2.17.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1/aabab3165b8ea936b9360abbf448459c0d04a5a4/geronimo-jta_1.1_spec-1.1.1.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.hibernate.common:hibernate-commons-annotations:5.0.1.final.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate.common/hibernate-commons-annotations/5.0.1.Final/71e1cff3fcb20d3b3af4f3363c3ddb24d33c6879/hibernate-commons-annotations-5.0.1.Final.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.final.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0.Final/5e731d961297e5a07290bfaf3db1fbc8bbbf405a/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.hibernate:hibernate-core:5.1.0.final.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.1.0.Final/1b5ac619df76cfd67222ca7cddcee6b0a5db8d0c/hibernate-core-5.1.0.Final.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.javassist:javassist:3.20.0-ga.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.20.0-GA/a9cbcdfb7e9f86fbc74d3afae65f2248bfbf82a0/javassist-3.20.0-GA.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jboss.logging:jboss-logging:3.3.0.final.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging/3.3.0.Final/3616bb87707910296e2c195dc016287080bba5af/jboss-logging-3.3.0.Final.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.jboss:jandex:2.0.0.final.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jboss/jandex/2.0.0.Final/3e899258936f94649c777193e1be846387ed54b3/jandex-2.0.0.Final.jar"/>
+  </path>
+  
+  <path id="library.gradle:_org.postgresql:postgresql:9.3-1102-jdbc41.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.postgresql/postgresql/9.3-1102-jdbc41/e01373bd6ed64d1b3bf1476e5ed6a7652a5fbfcb/postgresql-9.3-1102-jdbc41.jar"/>
+  </path>
+  
+  <path id="library.gradle:_xml-apis:xml-apis:1.0.b2.classpath">
+    <pathelement location="${basedir}/../../../.gradle/caches/modules-2/files-2.1/xml-apis/xml-apis/1.0.b2/3136ca936f64c9d68529f048c2618bd356bf85c9/xml-apis-1.0.b2.jar"/>
+  </path>
+  
+  
+  <!-- Global Libraries -->
+  
+  
+  <!-- Application Server Libraries -->
+  <!-- Register Custom Compiler Taskdefs -->
+  <property name="javac2.home" value="${idea.home}/lib"/>
+  <path id="javac2.classpath">
+    <pathelement location="${javac2.home}/javac2.jar"/>
+    <pathelement location="${javac2.home}/jdom.jar"/>
+    <pathelement location="${javac2.home}/asm-all.jar"/>
+    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
+  </path>
+  <target name="register.custom.compilers">
+    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
+    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
+  </target>
+  
+  <!-- Modules -->
+  
+  <import file="${basedir}/module_web.xml"/>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.web, clean.artifact.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.web" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.gradle_:_javaforweb:web_:_web-1.0.war" value="${basedir}/classes/artifacts/web"/>
+    <property name="artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)" value="${basedir}/classes/artifacts/web/exploded/web-1.0.war"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.web-1.0.war" value="${artifacts.temp.dir}/web-1.0.war"/>
+  </target>
+  
+  <target name="clean.artifact.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)" description="clean Gradle : JavaForWeb:web : web-1.0.war (exploded) artifact output">
+    <delete dir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}"/>
+  </target>
+  
+  <target name="artifact.gradle_:_javaforweb:web_:_web-1.0.war" depends="init.artifacts, compile.module.web" description="Build &#39;Gradle : JavaForWeb:web : web-1.0.war&#39; artifact">
+    <property name="artifact.temp.output.gradle_:_javaforweb:web_:_web-1.0.war" value="${artifacts.temp.dir}/Gradle___JavaForWeb_web___web_1_0_war"/>
+    <mkdir dir="${artifact.temp.output.gradle_:_javaforweb:web_:_web-1.0.war}"/>
+    <zip destfile="${temp.jar.path.web-1.0.war}">
+      <zipfileset dir="${basedir}/src/main/webapp"/>
+      <zipfileset file="${basedir}/src/main/webapp/WEB-INF/web.xml" prefix="WEB-INF"/>
+      <zipfileset dir="${web.output.dir}" prefix="WEB-INF/classes"/>
+      <zipfileset dir="${basedir}/build/resources/main" prefix="WEB-INF/classes"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.0.1/6bf0ebb7efd993e222fc1112377b5e92a13b38dd/javax.servlet-api-3.0.1.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.1.0.Final/1b5ac619df76cfd67222ca7cddcee6b0a5db8d0c/hibernate-core-5.1.0.Final.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.postgresql/postgresql/9.3-1102-jdbc41/e01373bd6ed64d1b3bf1476e5ed6a7652a5fbfcb/postgresql-9.3-1102-jdbc41.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging/3.3.0.Final/3616bb87707910296e2c195dc016287080bba5af/jboss-logging-3.3.0.Final.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0.Final/5e731d961297e5a07290bfaf3db1fbc8bbbf405a/hibernate-jpa-2.1-api-1.0.0.Final.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.20.0-GA/a9cbcdfb7e9f86fbc74d3afae65f2248bfbf82a0/javassist-3.20.0-GA.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/antlr/antlr/2.7.7/83cd2cd674a217ade95a4bb83a8a14f351f48bd0/antlr-2.7.7.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1/aabab3165b8ea936b9360abbf448459c0d04a5a4/geronimo-jta_1.1_spec-1.1.1.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jboss/jandex/2.0.0.Final/3e899258936f94649c777193e1be846387ed54b3/jandex-2.0.0.Final.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml/classmate/1.3.0/183407ff982e9375f1a1c4a51ed0a9307c598fc7/classmate-1.3.0.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/dom4j/dom4j/1.6.1/5d3ccc056b6f056dbf0dddfdf43894b9065a8f94/dom4j-1.6.1.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate.common/hibernate-commons-annotations/5.0.1.Final/71e1cff3fcb20d3b3af4f3363c3ddb24d33c6879/hibernate-commons-annotations-5.0.1.Final.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/xml-apis/xml-apis/1.0.b2/3136ca936f64c9d68529f048c2618bd356bf85c9/xml-apis-1.0.b2.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/5af35056b4d257e4b64b9e8069c0746e8b08629f/log4j-1.2.17.jar" prefix="WEB-INF/lib"/>
+      <zipfileset file="${basedir}/classes/artifacts/web/exploded/web-1.0.war/META-INF/MANIFEST.MF" prefix="META-INF"/>
+    </zip>
+    <copy file="${temp.jar.path.web-1.0.war}" tofile="${artifact.temp.output.gradle_:_javaforweb:web_:_web-1.0.war}/web-1.0.war"/>
+  </target>
+  
+  <target name="artifact.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)" depends="init.artifacts, compile.module.web" description="Build &#39;Gradle : JavaForWeb:web : web-1.0.war (exploded)&#39; artifact">
+    <mkdir dir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}"/>
+    <copy todir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}">
+      <fileset dir="${basedir}/src/main/webapp"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF"/>
+    <copy file="${basedir}/src/main/webapp/WEB-INF/web.xml" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/web.xml"/>
+    <mkdir dir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF"/>
+    <mkdir dir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/classes"/>
+    <copy todir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/classes">
+      <fileset dir="${web.output.dir}"/>
+    </copy>
+    <copy todir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/classes">
+      <fileset dir="${basedir}/build/resources/main"/>
+    </copy>
+    <mkdir dir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/javax.servlet/javax.servlet-api/3.0.1/6bf0ebb7efd993e222fc1112377b5e92a13b38dd/javax.servlet-api-3.0.1.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/javax.servlet-api-3.0.1.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate/hibernate-core/5.1.0.Final/1b5ac619df76cfd67222ca7cddcee6b0a5db8d0c/hibernate-core-5.1.0.Final.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/hibernate-core-5.1.0.Final.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.postgresql/postgresql/9.3-1102-jdbc41/e01373bd6ed64d1b3bf1476e5ed6a7652a5fbfcb/postgresql-9.3-1102-jdbc41.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/postgresql-9.3-1102-jdbc41.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jboss.logging/jboss-logging/3.3.0.Final/3616bb87707910296e2c195dc016287080bba5af/jboss-logging-3.3.0.Final.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/jboss-logging-3.3.0.Final.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0.Final/5e731d961297e5a07290bfaf3db1fbc8bbbf405a/hibernate-jpa-2.1-api-1.0.0.Final.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.javassist/javassist/3.20.0-GA/a9cbcdfb7e9f86fbc74d3afae65f2248bfbf82a0/javassist-3.20.0-GA.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/javassist-3.20.0-GA.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/antlr/antlr/2.7.7/83cd2cd674a217ade95a4bb83a8a14f351f48bd0/antlr-2.7.7.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/antlr-2.7.7.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1/aabab3165b8ea936b9360abbf448459c0d04a5a4/geronimo-jta_1.1_spec-1.1.1.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/geronimo-jta_1.1_spec-1.1.1.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.jboss/jandex/2.0.0.Final/3e899258936f94649c777193e1be846387ed54b3/jandex-2.0.0.Final.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/jandex-2.0.0.Final.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/com.fasterxml/classmate/1.3.0/183407ff982e9375f1a1c4a51ed0a9307c598fc7/classmate-1.3.0.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/classmate-1.3.0.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/dom4j/dom4j/1.6.1/5d3ccc056b6f056dbf0dddfdf43894b9065a8f94/dom4j-1.6.1.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/dom4j-1.6.1.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/org.hibernate.common/hibernate-commons-annotations/5.0.1.Final/71e1cff3fcb20d3b3af4f3363c3ddb24d33c6879/hibernate-commons-annotations-5.0.1.Final.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/hibernate-commons-annotations-5.0.1.Final.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/xml-apis/xml-apis/1.0.b2/3136ca936f64c9d68529f048c2618bd356bf85c9/xml-apis-1.0.b2.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/xml-apis-1.0.b2.jar"/>
+    <copy file="${basedir}/../../../.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.17/5af35056b4d257e4b64b9e8069c0746e8b08629f/log4j-1.2.17.jar" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/WEB-INF/lib/log4j-1.2.17.jar"/>
+    <mkdir dir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/META-INF"/>
+    <copy file="${basedir}/classes/artifacts/web/exploded/web-1.0.war/META-INF/MANIFEST.MF" tofile="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)}/META-INF/MANIFEST.MF"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.gradle_:_javaforweb:web_:_web-1.0.war, artifact.gradle_:_javaforweb:web_:_web-1.0.war_(exploded)" description="Build all artifacts">
+    <mkdir dir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war}"/>
+    <copy todir="${artifact.output.gradle_:_javaforweb:web_:_web-1.0.war}">
+      <fileset dir="${artifact.temp.output.gradle_:_javaforweb:web_:_web-1.0.war}"/>
+    </copy>
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>
