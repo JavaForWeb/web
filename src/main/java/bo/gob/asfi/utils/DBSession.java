@@ -2,11 +2,13 @@ package bo.gob.asfi.utils;
 
 import bo.gob.asfi.entity.Account;
 import bo.gob.asfi.entity.Transfer;
+import bo.gob.asfi.entity.UploadFile;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.exception.SQLGrammarException;
+import org.hibernate.service.spi.ServiceException;
 
 import java.util.Properties;
 
@@ -49,6 +51,7 @@ public class DBSession
 			.configure("hibernate.cfg.xml")
 			.addAnnotatedClass(Account.class)
 			.addAnnotatedClass(Transfer.class)
+			.addAnnotatedClass(UploadFile.class)
 			.setProperty("hibernate.connection.username", config.getProperty("postgresql.user"))
 			.setProperty("hibernate.connection.password", config.getProperty("postgresql.pass"));
 
@@ -61,6 +64,10 @@ public class DBSession
 		} catch( SQLGrammarException e) {
 			log.error(e.getMessage());
 			e.printStackTrace();
+			System.exit(0);
+		} catch(ServiceException e) {
+			log.error(e.getMessage());
+			log.error(e.getCause());
 			System.exit(0);
 		}
 

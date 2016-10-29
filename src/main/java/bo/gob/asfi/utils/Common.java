@@ -53,6 +53,7 @@ public class Common
 
 		try {
 			String filename = System.getProperty("user.dir") + "/" + configFile;
+			log.info("config should be in " + filename);
 			input = new FileInputStream(filename);
 			prop.load(input);
 			return prop;
