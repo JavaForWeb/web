@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by fernando on 10/27/16.
@@ -32,13 +33,52 @@ import java.util.Map;
 public class TransferServlet extends HttpServlet
 {
 	static Logger log = Logger.getLogger(TransferServlet.class.getName());
+	static Integer count = 0;
+	static Integer countAccounts = 0;
+	static Integer countTransfers = 0;
+	static Random random = new Random();
+
+	public TransferServlet()
+	{
+		Session session = DBSession.getInstance().getSession();
+		session.beginTransaction();
+
+		countAccounts = ((Long)session.createQuery("select count(*) from Account").uniqueResult()).intValue();
+		countTransfers = ((Long)session.createQuery("select count(*) from Transfer").uniqueResult()).intValue();
+
+		log.info( "there are " + countTransfers + " transfers");
+	}
+
+	private void executeCount(HttpServletResponse response) throws IOException
+	{
+		log.info("executeHQLwithLazy");
+		PrintWriter writer = response.getWriter();
+		writer.println("" + getServletContext().getServletContextName());
+		writer.println("  ?type=0 count transfer");
+		writer.println("  ?type=1 executeHQLwithLazy");
+		writer.println("  ?type=2 transfer example");
+
+
+		writer.println("\nNamed HQL query for Account" );
+
+		Session session = DBSession.getInstance().getSession();
+		session.beginTransaction();
+
+		countTransfers = ((Long)session.createQuery("select count(*) from Transfer").uniqueResult()).intValue();
+
+		log.info("there are " + countTransfers + " transfers");
+		writer.println("there are " + countTransfers + " transfers");
+
+		session.getTransaction().commit();
+		writer.flush();
+		writer.close();
+
+	}
 
 	private void executeHQLwithLazy(HttpServletResponse response) throws IOException
 	{
 		log.info("executeHQLwithLazy");
 		PrintWriter writer = response.getWriter();
-		writer.println("" + getServletContext().getServletContextName());
-
 
 		writer.println("\nNamed HQL query for Account" );
 
@@ -73,8 +113,6 @@ public class TransferServlet extends HttpServlet
 	{
 		log.info("executeHQLwithJoin");
 		PrintWriter writer = response.getWriter();
-		writer.println("" + getServletContext().getServletContextName());
-
 
 		writer.println("\nNamed HQL query for Transfer" );
 
@@ -82,7 +120,9 @@ public class TransferServlet extends HttpServlet
 		session.beginTransaction();
 
 
-		Query query = session.getNamedQuery("findAllTransferNativeSql");
+		Query query = session.getNamedQuery("findAllTransferNativeSql").
+			setFirstResult(0).
+			setMaxResults(20);
 		query.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		List data = query.list();
 
@@ -110,6 +150,52 @@ public class TransferServlet extends HttpServlet
 
 	}
 
+	private void executeSampleTransfer(HttpServletResponse response) throws IOException
+	{
+		PrintWriter writer = response.getWriter();
+
+		int source = random.nextInt(countAccounts);
+		int target = random.nextInt(countAccounts);
+		int amount = random.nextInt(100)*5;
+		String transferDesc = "";
+		String status;
+
+		try {
+			Session session = DBSession.getInstance().getSession();
+			session.beginTransaction();
+
+			Account accountSource = session.get(Account.class, source);
+			Account accountTarget = session.get(Account.class, target);
+
+			if(accountSource.getBalance() > amount) {
+				accountSource.setBalance(accountSource.getBalance() - amount);
+				accountTarget.setBalance(accountTarget.getBalance() + amount);
+
+				transferDesc = String
+					.format("(%d)%s sent %5d to (%d)%s ", accountSource.getId(), accountSource.getName(), amount, accountTarget.getId(),
+						accountTarget.getName());
+				status = "success";
+
+			} else {
+				transferDesc = String.format("(%d)%s try to send %5d to (%d)%s ", accountSource.getId(), accountSource.getName(), amount,
+					accountTarget.getId(), accountTarget.getName());
+				status = "no funds";
+			}
+
+			Transfer transfer = new Transfer(null, accountSource, accountTarget, amount, transferDesc, status);
+			session.save(transfer);
+
+			session.getTransaction().commit();
+		} catch(Exception e) {
+			log.error(e.getMessage());
+		}
+		writer.print(transferDesc);
+		writer.flush();
+
+		count ++;
+		log.info(count + " " + transferDesc );
+	}
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException
 	{
@@ -117,10 +203,20 @@ public class TransferServlet extends HttpServlet
 		String type = request.getParameter("type");
 
 		if (type == null || type.equals("1")) {
+			executeHQLwithLazy(response);
+			return;
+		}
+		/*
+		if (type == null || type.equals("2")) {
 			executeHQLwithJoin(response);
 			return;
 		}
-		executeHQLwithLazy(response);
+		*/
+		if (type == null || type.equals("2")) {
+			executeSampleTransfer(response);
+			return;
+		}
+		executeCount(response);
 	}
 
 }

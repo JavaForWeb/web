@@ -103,9 +103,10 @@ public class Common
 		Properties config = new Properties(readDefaultConfig());
 		config = readConfigFile(config, "hibernate.config");
 
-		log.info( config.getProperty("postgresql.host"));
-		log.info( config.getProperty("postgresql.port"));
-		log.info( config.getProperty("postgresql.database"));
+		//log.info( config.getProperty("postgresql.host"));
+		//log.info( config.getProperty("postgresql.port"));
+		//log.info( config.getProperty("postgresql.database"));
+		log.info( config.getProperty("postgresql.datasource"));
 		log.info( config.getProperty("postgresql.user"));
 
 		return config;

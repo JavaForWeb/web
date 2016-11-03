@@ -14,7 +14,7 @@ import java.io.PrintWriter;
  */
 
 @WebServlet(
-	name = "AnnotatedServlet",
+	name = "SimpleServlet",
 	description = "A sample and simple annotated servlet",
 	urlPatterns = {"/sample", "/simple"}
 )
@@ -24,7 +24,7 @@ public class SimpleServlet extends HttpServlet
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
-		log.info("doGet ");
+		log.info("doGet  ");
 
 		PrintWriter writer = response.getWriter();
 		writer.println("<html>Hello, I am a simple Java servlet!</html>");

@@ -6,14 +6,17 @@
 
     <session-factory>
 
+        <!-- Wildfly Datasource settings -->
+<!--
+        <property name="connection.datasource">java:/DataSourcePostgres</property>
+!-->
         <!-- JDBC Database connection settings -->
+<!--
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://localhost:5432/JavaForWeb</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">postgres</property>
-
-        <!-- JDBC connection pool settings ... using built-in test pool -->
-        <property name="connection.pool_size">2</property>
+!-->
 
         <!-- Select our SQL dialect -->
         <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>

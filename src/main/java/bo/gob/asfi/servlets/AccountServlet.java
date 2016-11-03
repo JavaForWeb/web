@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by fernando on 10/27/16.
@@ -32,41 +33,61 @@ import java.util.Map;
 public class AccountServlet extends HttpServlet
 {
 	static Logger log = Logger.getLogger(TransferServlet.class.getName());
+	static Integer count = 0;
+	static Random random = new Random();
 
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws IOException {
+	static Integer countAccounts = null;
 
-		log.info("doGet ");
-		PrintWriter writer = response.getWriter();
-
-
-
+	public AccountServlet()
+	{
 		Session session = DBSession.getInstance().getSession();
 		session.beginTransaction();
 
-		Query query = session.getNamedQuery("AccountsHQLwithLAZY").
-			setFirstResult(1).
-			setMaxResults(20);
+		countAccounts = ((Long)session.createQuery("select count(*) from Account").uniqueResult()).intValue();
 
-		List<Account> accounts = query.list();
+		log.info( "there are " + countAccounts + " accounts");
+	}
 
-		String strContentType = request.getContentType();
+	public void doGet(HttpServletRequest request, HttpServletResponse response) {
 
-		if ( "application/json".equals(strContentType)) {
-			response.setContentType("application/json");
-			String json = new ObjectMapper().writeValueAsString(accounts);
-			writer.println(json);
-		} else {
-			writer.println("\nNamed HQL query for Account" );
-			writer.printf("|%6s|%-30s|%-30s|%-30s|%-10s|\n", "id", "name", "description", "date", "number");
-			for (Account account: accounts) {
-				writer.printf("|%6d|%-30s|%-30s|%-30s|%-10s|\n", account.getId(), account.getName(), account.getLocation(),
-					account.getDate(), account.getBalance());
+		try {
+			count++;
+			PrintWriter writer = response.getWriter();
+
+			//Todo: check limits
+			int pageSize = 20;
+			int pagesTotal = countAccounts / pageSize;
+			int pageNumber = random.nextInt(pagesTotal) * pageSize;
+
+			Session session = DBSession.getInstance().getSession();
+			session.beginTransaction();
+
+			Query query = session.getNamedQuery("AccountsHQLwithLAZY").
+				setFirstResult(pageNumber).
+				setMaxResults(pageSize);
+
+			List<Account> accounts = query.list();
+
+			String strContentType = request.getContentType();
+			log.info("get accouns, count= " + count + " " + accounts.get(1).getName());
+
+			if("application/js	on".equals(strContentType)) {
+				response.setContentType("application/json");
+				String json = new ObjectMapper().writeValueAsString(accounts);
+				writer.println(json);
+			} else {
+				writer.println("\nNamed HQL query for Account (count=" + count + ")");
+				writer.printf("|%6s|%-30s|%-30s|%-30s|%-10s|\n", "id", "name", "description", "date", "number");
+				for(Account account : accounts) {
+					writer.printf("|%6d|%-30s|%-30s|%-30s|%-10s|\n", account.getId(), account.getName(), account.getLocation(), account.getDate(), account.getBalance());
+				}
 			}
-		}
 
-		session.getTransaction().commit();
-		writer.flush();
+			session.getTransaction().commit();
+			writer.flush();
+		} catch( Exception e) {
+			log.error(e);
+		}
 	}
 
 }

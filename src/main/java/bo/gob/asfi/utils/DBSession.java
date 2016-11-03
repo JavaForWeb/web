@@ -46,14 +46,18 @@ public class DBSession
 	public void initFactory(Properties config)
 	{
 		log.info("init factory for hibernate");
+
 		// create session factory
 		Configuration configuration = new Configuration()
 			.configure("hibernate.cfg.xml")
 			.addAnnotatedClass(Account.class)
 			.addAnnotatedClass(Transfer.class)
-			.addAnnotatedClass(UploadFile.class)
-			.setProperty("hibernate.connection.username", config.getProperty("postgresql.user"))
-			.setProperty("hibernate.connection.password", config.getProperty("postgresql.pass"));
+			.addAnnotatedClass(UploadFile.class);
+
+		//using the wildfly's datasource
+		configuration.setProperty("hibernate.connection.datasource", config.getProperty("postgresql.datasource"));
+		configuration.setProperty("hibernate.connection.username",   config.getProperty("postgresql.user"));
+		configuration.setProperty("hibernate.connection.password",   config.getProperty("postgresql.pass"));
 
 		if (config.containsKey("show_sql")) {
 			configuration.setProperty("hibernate.show_sql", config.getProperty("show_sql"));

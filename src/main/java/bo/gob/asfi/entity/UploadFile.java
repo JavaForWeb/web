@@ -33,8 +33,8 @@ public class UploadFile
 	// The first approach stores the file directly in the column. The type of such a column is bytea --> @Type
 	// The second approach is to store a OID in the column which references a file.  --> @Lob
 
-	//@Lob
-	@Type(type="org.hibernate.type.BinaryType")
+	@Lob
+	//@Type(type="org.hibernate.type.BinaryType")
 	@Column(name="content")
 	private byte[] content;
 
