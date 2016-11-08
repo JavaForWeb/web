@@ -19,13 +19,16 @@ import javax.jms.TextMessage;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/*
 @WebServlet(
 	name = "JMS Servlet",
 	description = "A sample JMS Sender",
 	urlPatterns = {"jms"}
 )
+*/
 
 public class JmsServlet extends HttpServlet {
+/*
 	@Resource(lookup = "java:/ConnectionFactory") ConnectionFactory connectionFactory;
 
 	@Resource(lookup = "java:/sampleQueue")
@@ -86,4 +89,6 @@ public class JmsServlet extends HttpServlet {
 			ex.printStackTrace(writer);
 		}
 	}
+	 */
+
 }
