@@ -32,7 +32,7 @@ import java.util.Random;
 )
 public class AccountServlet extends HttpServlet
 {
-	static Logger log = Logger.getLogger(TransferServlet.class.getName());
+	static Logger log = Logger.getLogger(AccountServlet.class.getName());
 	static Integer count = 0;
 	static Random random = new Random();
 

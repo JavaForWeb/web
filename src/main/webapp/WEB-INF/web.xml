@@ -9,5 +9,33 @@
         This is version 1.0
     </description>
 
+    <!-- servlet and mapping for the api REST !-->
+
+    <servlet-mapping>
+        <servlet-name>bo.gob.asfi.JaxrsApplication</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
+    <!-- security !-->
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>listados especiales</web-resource-name>
+            <url-pattern>/api/cuentas/secure1</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>updateREST</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>JavaForWeb REST API</realm-name>
+    </login-config>
+
+    <security-role>
+        <role-name>updateREST</role-name>
+    </security-role>
 
 </web-app>

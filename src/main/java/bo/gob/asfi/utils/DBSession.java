@@ -56,8 +56,8 @@ public class DBSession
 
 		//using the wildfly's datasource
 		configuration.setProperty("hibernate.connection.datasource", config.getProperty("postgresql.datasource"));
-		configuration.setProperty("hibernate.connection.username",   config.getProperty("postgresql.user"));
-		configuration.setProperty("hibernate.connection.password",   config.getProperty("postgresql.pass"));
+		//configuration.setProperty("hibernate.connection.username",   config.getProperty("postgresql.user"));
+		//configuration.setProperty("hibernate.connection.password",   config.getProperty("postgresql.pass"));
 
 		if (config.containsKey("show_sql")) {
 			configuration.setProperty("hibernate.show_sql", config.getProperty("show_sql"));
