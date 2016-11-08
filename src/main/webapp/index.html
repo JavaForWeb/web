@@ -34,8 +34,8 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#tab_home" data-toggle="tab">Home</a></li>
         <li><a href="#tab_servlets" data-toggle="tab">Servlets</a></li>
-        <li><a href="#tab_accounts" data-toggle="tab">Accounts</a></li>
-        <li><a href="#tab_newcontract" data-toggle="tab">Vendors</a></li>
+        <li><a href="#tab_rest" data-toggle="tab">REST</a></li>
+        <li><a href="#tab_messages" data-toggle="tab">Messages</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
@@ -101,6 +101,44 @@
                           </div>
                       </div>
 
+                      <div class="panel-heading">
+                          <h3 class="panel-title">Servlets</h3>
+                      </div>
+
+                      <div class="panel-body">
+                          <div class="row">
+                              <div class="form-group">
+                                  <label class="control-label col-sm-4" >account list:</label>
+                                  <a style='margin-left:5px' type="button" class="btn btn-sm btn-info col-sm-3" target="_new" href="./accounts">/accounts</a>
+                              </div>
+                          </div>
+                          <br/>
+                          <div class="row">
+                              <div class="form-group">
+                                  <label class="control-label col-sm-4" >transfer list 1</label>
+                                  <a style='margin-left:5px' type="button" class="btn btn-sm btn-info col-sm-3" target="_new" href="./transfer?type=0">/transfer</a>
+                              </div>
+                          </div>
+                          <br/>
+                          <div class="row">
+                              <div class="form-group">
+                                  <label class="control-label col-sm-4" >transfer list 2</label>
+                                  <a style='margin-left:5px' type="button" class="btn btn-sm btn-info col-sm-3" target="_new" href="./transfer?type=1">/transfer</a>
+                              </div>
+                          </div>
+                          <br/>
+                          <div class="row">
+                              <div class="form-group">
+                                  <label class="control-label col-sm-4" >transfer example</label>
+                                  <a style='margin-left:5px' type="button" class="btn btn-sm btn-info col-sm-3" target="_new" href="./transfer?type=2">/transfer</a>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="alert">
+                          <span id="status2" class="alert "></span>
+                      </div>
+
 
                   </div>
 
@@ -112,49 +150,47 @@
       </div>
 
       <!-- accounts -->
-    <div class="tab-pane fade" id="tab_accounts">
+    <div class="tab-pane fade" id="tab_rest">
         <div class="row">
             <div class="col-sm-7">
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Accounts</h3>
+                        <h3 class="panel-title">Rest Endpoints</h3>
                     </div>
 
                     <div class="panel-body">
                         <div class="row">
                             <div class="form-group">
-                                <label class="control-label col-sm-4" >account list:</label>
-                                <a style='margin-left:5px' type="button" class="btn btn-sm btn-info col-sm-3" target="_new" href="./accounts">/accounts</a>
+                                <a style='margin-left:5px' class="col-sm-3" target="_new" href="./doc">Swagger Doc</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <a style='margin-left:5px' class="col-sm-3" target="_new" href="./api/swagger.json">Swagger json file</a>
                             </div>
                         </div>
                         <br/>
                         <div class="row">
                             <div class="form-group">
-                                <label class="control-label col-sm-4" >transfer list 1</label>
-                                <a style='margin-left:5px' type="button" class="btn btn-sm btn-info col-sm-3" target="_new" href="./transfer?type=0">/transfer</a>
+                                <a style='margin-left:5px' class="col-sm-3" target="_new" href="./api/cuentas">/api/cuentas</a>
                             </div>
                         </div>
-                        <br/>
                         <div class="row">
                             <div class="form-group">
-                                <label class="control-label col-sm-4" >transfer list 2</label>
-                                <a style='margin-left:5px' type="button" class="btn btn-sm btn-info col-sm-3" target="_new" href="./transfer?type=1">/transfer</a>
+                                <a style='margin-left:5px' class="col-sm-3" target="_new" href="./api/cuentas">/api/cuentas/secure1</a>
                             </div>
                         </div>
-                        <br/>
                         <div class="row">
                             <div class="form-group">
-                                <label class="control-label col-sm-4" >transfer example</label>
-                                <a style='margin-left:5px' type="button" class="btn btn-sm btn-info col-sm-3" target="_new" href="./transfer?type=2">/transfer</a>
+                                <a style='margin-left:5px' class="col-sm-3" target="_new" href="./api/cuentas">/api/cuentas/secure2</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <a style='margin-left:5px' class="col-sm-3" target="_new" href="./api/cuentas">/api/transfers</a>
                             </div>
                         </div>
                     </div>
-
-                    <div class="alert">
-                        <span id="status2" class="alert "></span>
-                    </div>
-
-
                 </div>
 
                 <div class="col-sm-2">
@@ -166,45 +202,15 @@
     </div>
 
     <!-- contracts -->
-    <div class="tab-pane fade" id="tab_contracts">
+    <div class="tab-pane fade" id="tab_messages">
       <div class="row tab-header">
-        <div class="col-sm-6">
-          <h2>Contracts</h2>
-        </div>
-        <div class="col-sm-6 tab-header-column">
-          <!--<button type="button" class="btn btn-default tab-header-button" onclick="postToServlet()">add contract</button> -->
-        </div>
-      </div>
 
       <div class="row">
         <div class="col-sm-7">
-          <table id="table-contracts" class="table table-striped table-bordered">
-            <thead>
-              <tr>
-                <th>account</th>
-                <th>contract</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
+
+
         </div>
         <div class="col-sm-4">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h2 class="panel-title">contractsByAddress</h2>
-            </div>
-
-            <div class="panel-body">
-              <p><b>Address:</b></p>
-              <p><span id="contractsByAddressText"></span></p>
-
-              <p><b>ABI:</b></p>
-                <textarea id="contractsByAddressABI" rows=16 cols=43 ></textarea>
-              </p>
-
-            </div>
-          </div>
         </div>
       </div>
 

@@ -27,8 +27,8 @@
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/resources" />
           <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -95,5 +95,7 @@
     <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.4.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: io.swagger:swagger-annotations:1.5.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.fasterxml.jackson.core:jackson-annotations:2.4.2" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: jboss:jboss-client:4.0.2" level="project" />
+    <orderEntry type="library" name="jboss-client" level="project" />
   </component>
 </module>

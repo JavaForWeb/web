@@ -15,7 +15,7 @@ import java.io.PrintWriter;
 
 @WebServlet(
 	name = "SimpleServlet",
-	description = "A sample and simple annotated servlet",
+	description = "This is a sample and simple annotated servlet",
 	urlPatterns = {"/sample", "/simple"}
 )
 public class SimpleServlet extends HttpServlet

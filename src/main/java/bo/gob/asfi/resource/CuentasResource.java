@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -59,8 +60,8 @@ public class CuentasResource
 
 
 	@GET
-	@ApiOperation(value = "Lista paginada de cuentas",
-		notes = "Retorna una lista de cuentas, <br>si page no esta definida, se elige una pagina al azar, <br> pagesize es 20 registros por default",
+	@ApiOperation(value = "Lista paginada de cuentas [sin autenticación]",
+		notes = "No requiere autenticacion.<br>Retorna una lista de cuentas, <br>si page no esta definida, se elige una pagina al azar, <br> pagesize es 20 registros por default",
 		response = List.class)
 	@ApiResponses(value = {
 		@ApiResponse(code = 200, message = "ok"),
@@ -123,8 +124,8 @@ public class CuentasResource
 
 	@GET
 	@Path("secure1")
-	@ApiOperation(value = "Lista paginada de cuentas",
-		notes = "Retorna una lista de cuentas, <br>si page no esta definida, se elige una pagina al azar, <br> pagesize es 20 registros por default",
+	@ApiOperation(value = "Lista paginada de cuentas [autenticación web.xml]",
+		notes = "Usando web.xml para autenticacion.<br>Retorna una lista de cuentas, <br>si page no esta definida, se elige una pagina al azar, <br> pagesize es 20 registros por default",
 		response = List.class)
 	@ApiResponses(value = {
 		@ApiResponse(code = 200, message = "ok"),
@@ -174,9 +175,10 @@ public class CuentasResource
 
 	@GET
 	@Path("secure2")
-	@ApiOperation(value = "Lista paginada de cuentas",
-		notes = "Retorna una lista de cuentas, <br>si page no esta definida, se elige una pagina al azar, <br> pagesize es 20 registros por default",
-		response = List.class)
+	@ApiOperation(value = "Lista paginada de cuentas  autenticación SecurityContext]",
+		notes = "Usando SecurityContext para autenticacion.<br>Retorna una lista de cuentas, <br>si page no esta definida, se elige una pagina al azar, <br> pagesize es 20 registros por default",
+		response = List.class
+	)
 	@ApiResponses(value = {
 		@ApiResponse(code = 200, message = "ok"),
 		@ApiResponse(code = 204, message = "no existe la pagina solicitada"),

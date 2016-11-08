@@ -40,6 +40,9 @@ dependencies {
     //swagger
     compile group: 'io.swagger', name: 'swagger-jersey-jaxrs', version: '1.5.0'
 
+    //javax.jms
+    //compile group: 'jboss', name: 'jboss-client', version: '4.0.2'
+
 }
 
 war {
