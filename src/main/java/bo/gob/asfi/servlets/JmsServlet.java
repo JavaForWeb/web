@@ -1,7 +1,7 @@
 package bo.gob.asfi.servlets;
 
 import org.apache.log4j.Logger;
-
+/*
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +18,7 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import java.io.IOException;
 import java.io.PrintWriter;
+*/
 
 /*
 @WebServlet(
