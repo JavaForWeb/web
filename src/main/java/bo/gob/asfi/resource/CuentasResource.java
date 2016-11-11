@@ -12,6 +12,8 @@ import io.swagger.annotations.Authorization;
 import org.apache.log4j.Logger;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.Date;
 import java.util.List;
@@ -24,6 +26,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
@@ -108,11 +111,20 @@ public class CuentasResource
 			Session session = DBSession.getInstance().getSession();
 			session.beginTransaction();
 
-			Query query = session.getNamedQuery("AccountsHQLwithLAZY").
+			Query query = session.createQuery("from Account c").
 				setFirstResult(pageNumber).
 				setMaxResults(pageSize);
-
 			List<Account> accounts = query.list();
+
+			/*
+			List<Account> accounts=(List<Account>) session.createCriteria(Account.class)
+				.add(Restrictions.like("name", "ame%"))
+				.addOrder(Order.desc("balance"))
+				.setFirstResult(pageNumber)
+				.setMaxResults(pageSize)
+				.list();
+			*/
+			
 			session.getTransaction().commit();
 
 			return accounts;
@@ -121,6 +133,35 @@ public class CuentasResource
 			throw new BadRequestException();
 		}
 	}
+
+	@GET
+	@Path("/{id}")
+	@ApiOperation(value = "obtener una cuenta",
+		notes = "No requiere autenticacion.<br>Retorna una cuenta",
+		response = Account.class)
+	@ApiResponses(value = {
+		@ApiResponse(code = 200, message = "ok"),
+		@ApiResponse(code = 400, message = "malformed message")
+	})
+	@Produces({"application/json"})
+
+	public Account getAccount(
+		@ApiParam(value = " id", required = true)
+		@PathParam("id") Integer id
+	) {
+		try {
+			Session session = DBSession.getInstance().getSession();
+			session.beginTransaction();
+
+			Account account = session.get( Account.class, id);
+
+			return account;
+		} catch( Exception e) {
+			log.error(e);
+			throw new BadRequestException();
+		}
+	}
+
 
 	@GET
 	@Path("secure1")
